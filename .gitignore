@@ -1,0 +1,6 @@
+# emacs backup files
+*~
+# library downloads
+openfst-1.6.9/*
+pynini-2.0.0/*
+re2/*

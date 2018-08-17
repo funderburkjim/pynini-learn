@@ -1,0 +1,119 @@
+# start with empty ubuntu 14.04
+
+
+vagrant up
+vagrant ssh
+* install some python stuff
+  configuring openfst with python enabled gave an error, and suggested that
+  the python-dev package was needed.  Thus, this collection of installs:
+  These were installed in cython;  these were in script.sh (without the sudo).
+Here, we do manually, with sudo.
+sudo apt-get -y install python-pip
+sudo apt-get -y install build-essential # already installed
+sudo apt-get -y install python-dev
+
+sudo pip install Cython   # not documented in pynini install instructions!
+* install gcc and g++
+# python version is 2.7.6
+# gcc version is 4.8.4
+   # ? sudo apt-get -y install python-pip
+sudo apt-get update
+sudo apt-get -y install g++
+* openfst
+** download
+http://www.openfst.org/twiki/pub/FST/FstDownload/openfst-1.6.9.tar.gz
+unpack to openfst-1.6.9 folder (with 7-zip) and move to this folder
+** configure
+# in git bash,
+Assuming in ubuntu shell (vagrant ssh):
+cd /vagrant/openfst-1.6.9
+
+./configure  --enable-grm --enable-static=no --enable-python
+
+http://www.openfst.org/twiki/pub/GRM/PyniniDownload/README.rst
+http://www.openfst.org/twiki/pub/FST/FstDownload/README
+for pynini:
+./configure --enable-grm
+for faster compiles: --enable-static=no
+--enable-python  may be useful for working with openfst in python.
+
+** make
+make
+Failed: virtual memory exhausted: Cannot allocate memory
+ Added swapspace (see below 'Change vagrantfile for swapfile')
+ Then reran.  make took about 10 minutes.  Possibly would be faster
+ by increasing memory allocated to VM.  Changed Vagrantfile for this.
+** make install
+sudo make install
+
+* create swap file  does not work
+ref: https://digitizor.com/create-swap-file-ubuntu-linux/
+
+cd /vagrant
+sudo dd if=/dev/zero of=swapfile bs=1M count=3000
+sudo mkswap swapfile
+sudo swapon ./swapfile
+* Change vagrantfile for swapfile
+config.vm.provision "shell", inline: "sudo apt install swapspace -y"
+
+Then reprovision
+vagrant up --provision
+ [The process is hanging! at
+   Preparing to unpack .../swapspace_1.10-4ubuntu3_i386.deb
+ ]
+#  verfiy it's running
+sudo service swapspace status
+ # * swapspace is running
+* google re2 library
+https://github.com/google/re2
+a) in another bash terminal, in ~/vagrant/pynini:  clone the repository
+git clone https://github.com/google/re2.git
+b) in vagrant ssh:
+cd /vagrant/re2
+make
+  ln: failed to create symbolic link ‘obj/so/libre2.so’: Protocol error
+  Solution(?):
+   logout of vagrant ssh,  vagrant halt, close git bash
+   open git bash as admin, vagrant up, vagrant ssh, cd/vagrant/re2,
+   make   Appears to work.
+make test
+  # ALL TESTS PASSED
+sudo make install
+sudo make testinstall
+  # Install tests passed
+* FAILED PYNINI
+http://pynini.opengrm.org
+download pynini-2.0.0.tar.gz 
+construct pynini-2.0.0 folder with 7-zip
+copy pynini-2.0.0 folder to ~/vagrant/pynini/
+
+# within vagrant ssh:
+cd /vagrant/pynini-2.0.0
+sudo python setup.py install
+Begin 3:35PM   (vagrant box provisioned with 2GB of memory)
+  # this takes about minutes, with many warnings.
+** note on initial failure # this hangs after
+i686-linux-gnu-gcc -pthread -fno-strict-aliasing -DNDEBUG -g -fwrapv -O2 -Wall -Wstrict-prototypes -fPIC -I/usr/include/python2.7 -c src/pynini_cdrewrite.cc -o build/temp.linux-i686-2.7/src/pynini_cdrewrite.o -std=c++11 -Wno-unused-function -Wno-unused-local-typedef -funsigned-char
+cc1plus: warning: command line option ‘-Wstrict-prototypes’ is valid for C/ObjC but not for C++ [enabled by default]
+
+ref: https://github.com/kylebgorman/Pynini/issues/5
+Kyle's comments prompted the increase in memory (to 2GB) in the VM,
+and this solved the problem.
+NOTE:  This is tested with a new python: Python 2.7.13.
+* PROBLEM Confirm successful pynini installation
+in pynini-2.0.0
+python setup.py test
+
+After many lines,
+ImportError: libre2.so.0: cannot open shared object file: No such file or directory
+
+* SOLUTION pynini test now works.
+ref: https://stackoverflow.com/questions/8323794/re2-library-loading
+
+Went back into re2 directory, and
+sudo ldconfig.
+
+Now back to pynini-2.0.0 and
+python setup.py test
+>>> Ran 158 tests in 0.610s
+

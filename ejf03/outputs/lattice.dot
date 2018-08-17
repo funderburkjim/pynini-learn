@@ -1,0 +1,90 @@
+digraph FST {
+rankdir = LR;
+size = "8.5,11";
+label = "";
+center = 1;
+orientation = Landscape;
+ranksep = "0.4";
+nodesep = "0.25";
+0 [label = "0", shape = circle, style = bold, fontsize = 14]
+	0 -> 1 [label = "a:<epsilon>/1", fontsize = 14];
+	0 -> 2 [label = "<epsilon>:b/1", fontsize = 14];
+	0 -> 3 [label = "a:b/1", fontsize = 14];
+1 [label = "1", shape = circle, style = solid, fontsize = 14]
+	1 -> 4 [label = "b:<epsilon>/1", fontsize = 14];
+	1 -> 3 [label = "<epsilon>:b/1", fontsize = 14];
+	1 -> 5 [label = "b:b", fontsize = 14];
+2 [label = "2", shape = circle, style = solid, fontsize = 14]
+	2 -> 3 [label = "a:<epsilon>/1", fontsize = 14];
+	2 -> 6 [label = "<epsilon>:a/1", fontsize = 14];
+	2 -> 7 [label = "a:a", fontsize = 14];
+3 [label = "3", shape = circle, style = solid, fontsize = 14]
+	3 -> 5 [label = "b:<epsilon>/1", fontsize = 14];
+	3 -> 7 [label = "<epsilon>:a/1", fontsize = 14];
+	3 -> 8 [label = "b:a/1", fontsize = 14];
+4 [label = "4", shape = circle, style = solid, fontsize = 14]
+	4 -> 9 [label = "b:<epsilon>/1", fontsize = 14];
+	4 -> 5 [label = "<epsilon>:b/1", fontsize = 14];
+	4 -> 10 [label = "b:b", fontsize = 14];
+5 [label = "5", shape = circle, style = solid, fontsize = 14]
+	5 -> 10 [label = "b:<epsilon>/1", fontsize = 14];
+	5 -> 8 [label = "<epsilon>:a/1", fontsize = 14];
+	5 -> 11 [label = "b:a/1", fontsize = 14];
+6 [label = "6", shape = circle, style = solid, fontsize = 14]
+	6 -> 7 [label = "a:<epsilon>/1", fontsize = 14];
+	6 -> 12 [label = "<epsilon>:b/1", fontsize = 14];
+	6 -> 13 [label = "a:b/1", fontsize = 14];
+7 [label = "7", shape = circle, style = solid, fontsize = 14]
+	7 -> 8 [label = "b:<epsilon>/1", fontsize = 14];
+	7 -> 13 [label = "<epsilon>:b/1", fontsize = 14];
+	7 -> 14 [label = "b:b", fontsize = 14];
+8 [label = "8", shape = circle, style = solid, fontsize = 14]
+	8 -> 11 [label = "b:<epsilon>/1", fontsize = 14];
+	8 -> 14 [label = "<epsilon>:b/1", fontsize = 14];
+	8 -> 15 [label = "b:b", fontsize = 14];
+9 [label = "9", shape = circle, style = solid, fontsize = 14]
+	9 -> 16 [label = "a:<epsilon>/1", fontsize = 14];
+	9 -> 10 [label = "<epsilon>:b/1", fontsize = 14];
+	9 -> 17 [label = "a:b/1", fontsize = 14];
+10 [label = "10", shape = circle, style = solid, fontsize = 14]
+	10 -> 17 [label = "a:<epsilon>/1", fontsize = 14];
+	10 -> 11 [label = "<epsilon>:a/1", fontsize = 14];
+	10 -> 18 [label = "a:a", fontsize = 14];
+11 [label = "11", shape = circle, style = solid, fontsize = 14]
+	11 -> 18 [label = "a:<epsilon>/1", fontsize = 14];
+	11 -> 15 [label = "<epsilon>:b/1", fontsize = 14];
+	11 -> 19 [label = "a:b/1", fontsize = 14];
+12 [label = "12", shape = circle, style = solid, fontsize = 14]
+	12 -> 13 [label = "a:<epsilon>/1", fontsize = 14];
+	12 -> 20 [label = "<epsilon>:a/1", fontsize = 14];
+	12 -> 21 [label = "a:a", fontsize = 14];
+13 [label = "13", shape = circle, style = solid, fontsize = 14]
+	13 -> 14 [label = "b:<epsilon>/1", fontsize = 14];
+	13 -> 21 [label = "<epsilon>:a/1", fontsize = 14];
+	13 -> 22 [label = "b:a/1", fontsize = 14];
+14 [label = "14", shape = circle, style = solid, fontsize = 14]
+	14 -> 15 [label = "b:<epsilon>/1", fontsize = 14];
+	14 -> 22 [label = "<epsilon>:a/1", fontsize = 14];
+	14 -> 23 [label = "b:a/1", fontsize = 14];
+15 [label = "15", shape = circle, style = solid, fontsize = 14]
+	15 -> 19 [label = "a:<epsilon>/1", fontsize = 14];
+	15 -> 23 [label = "<epsilon>:a/1", fontsize = 14];
+	15 -> 24 [label = "a:a", fontsize = 14];
+16 [label = "16", shape = circle, style = solid, fontsize = 14]
+	16 -> 17 [label = "<epsilon>:b/1", fontsize = 14];
+17 [label = "17", shape = circle, style = solid, fontsize = 14]
+	17 -> 18 [label = "<epsilon>:a/1", fontsize = 14];
+18 [label = "18", shape = circle, style = solid, fontsize = 14]
+	18 -> 19 [label = "<epsilon>:b/1", fontsize = 14];
+19 [label = "19", shape = circle, style = solid, fontsize = 14]
+	19 -> 24 [label = "<epsilon>:a/1", fontsize = 14];
+20 [label = "20", shape = circle, style = solid, fontsize = 14]
+	20 -> 21 [label = "a:<epsilon>/1", fontsize = 14];
+21 [label = "21", shape = circle, style = solid, fontsize = 14]
+	21 -> 22 [label = "b:<epsilon>/1", fontsize = 14];
+22 [label = "22", shape = circle, style = solid, fontsize = 14]
+	22 -> 23 [label = "b:<epsilon>/1", fontsize = 14];
+23 [label = "23", shape = circle, style = solid, fontsize = 14]
+	23 -> 24 [label = "a:<epsilon>/1", fontsize = 14];
+24 [label = "24", shape = doublecircle, style = solid, fontsize = 14]
+}
