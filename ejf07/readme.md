@@ -39,7 +39,7 @@ mwlexicon_la.fst is 17064032 (~ 17MB)
 
 ### batch program to find nearest matches
 The pwis_notmw2.txt contains information on 1585 presumed Sanskrit words
-derived from another dictionary.  Many of these are misspelled.  Previous
+derived from another dictionary (see [PW IAST corrections](https://github.com/sanskrit-lexicon/CORRECTIONS/issues/419)).  Many of these are misspelled.  Previous
 work identifed possible corrections in various ways.  However, this previous
 work left 309 cases with no suggestions.  Our objective is to use the
 Levenshtein Automaton to generate suggestions for these 309.
