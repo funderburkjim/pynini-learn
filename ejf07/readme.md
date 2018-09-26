@@ -61,3 +61,16 @@ time.  I did two timing tests.
 
 These times seem slow.   Perhaps there is some detail of optimization
 that would improve the times.
+
+### Burnouf spelling suggestions
+09-26-2018
+
+```
+vagrant up
+vagrant ssh
+cd /vagrant/ejf07
+ python -W ignore bur_la.py mwlexicon_letters.txt mwlexicon_la.fst bur_input.txt bur_output.txt
+```
+
+194 words
+time: 924 sec. 4.8sec/word
